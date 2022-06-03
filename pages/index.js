@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div>
       <h1>The Ikenna Blog</h1>
-      <Link href="/about">About</Link>
+      <h2>Home Page</h2>
     </div>
   )
 }
