@@ -5,7 +5,7 @@ const Meta = ({ title, description }) => {
     <Head>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name='keywords' content='news, information, blog' />
+      <meta name='keywords' content='news, information, blog, lifestyle, sports, tech, webdev' />
       <meta name='description' content={description} />
       <title>{title}</title>
     </Head>

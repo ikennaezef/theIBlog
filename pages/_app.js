@@ -1,13 +1,12 @@
 import '../styles/globals.css'
-import Nav from '../components/Nav'
-import Meta from '../components/Meta'
+import Layout from '../components/Layout'
 
 function MyApp({ Component, pageProps }) {
   return (
     <>
-      <Meta />
-      <Nav />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }
