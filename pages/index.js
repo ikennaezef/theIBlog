@@ -1,12 +1,26 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link';
+import Hero from '../components/Hero';
 
-export default function Home() {
+import { sanityClient, urlFor } from '../lib/sanity';
+
+const postsQuery = '*[_type=="post"]{ _id, title, subtitle, slug, image}';
+
+export default function Home({ posts }) {
   return (
     <div>
-      <h1>The Ikenna Blog</h1>
-      <h2>Home Page</h2>
+      <Hero post={posts[4]} />
+      {posts.map(post => (
+        <div key={post._id}>
+          <h2 className='text-xl mb-3'>{post.title}</h2>
+          <img className='mb-8' src={urlFor(post.image).url()} />
+        </div>
+      ))}
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const posts = await sanityClient.fetch(postsQuery);
+  return {
+    props: { posts }
+  }
 }
