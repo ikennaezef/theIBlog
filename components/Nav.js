@@ -5,12 +5,12 @@ const Nav = () => {
     <nav className='shadow-lg'>
       <div className='container mx-auto px-4 py-5 flex justify-between items-center'>
         <Link href='/'>
-          <a className='logo text-2xl font-bold'>The<span className='text-green-600'>I</span>Blog</a>
+          <a className='logo text-2xl font-bold'>The<span className='text-emerald-600'>I</span>Blog</a>
         </Link>
         <div className='nav__links flex space-x-6'>
-          <Link href='/'><a className='hover:text-green-600'>Home</a></Link>
-          <Link href='/about'><a className='hover:text-green-600'>About</a></Link>
-          <Link href='/contact'><a className='hover:text-green-600'>Contact</a></Link>
+          <Link href='/'><a className='hover:text-emerald-600'>Home</a></Link>
+          <Link href='/about'><a className='hover:text-emerald-600'>About</a></Link>
+          <Link href='/contact'><a className='hover:text-emerald-600'>Contact</a></Link>
         </div>
       </div>
     </nav>
