@@ -1,26 +1,29 @@
 import Hero from '../components/Hero';
-import Post from '../components/Post';
+import LatestPosts from '../components/LatestPosts';
 
 import { sanityClient, urlFor } from '../lib/sanity';
 
-const postsQuery = '*[_type=="post"]{ _id, title, subtitle, slug, image}';
 
-export default function Home({ posts }) {
+
+export default function Home({ posts, latestPosts }) {
   return (
     <div>
       <Hero post={posts[4]} />
       <div className='container mx-auto px-4 pt-8'>
-        {posts.map(post => (
-          <Post post={post} />
-        ))}
+        <LatestPosts posts={latestPosts} />
       </div>
     </div>
   )
 }
 
 export async function getStaticProps() {
+
+  const postsQuery = '*[_type=="post"]{ _id, title, subtitle, slug, image}';
+  const latestPostsQuery = '*[_type=="post"] | order(publicationDate desc)[0..4]{ _id, title, subtitle, publicationDate, slug, image, author->{name, image}}'
+
   const posts = await sanityClient.fetch(postsQuery);
+  const latestPosts = await sanityClient.fetch(latestPostsQuery);
   return {
-    props: { posts }
+    props: { posts, latestPosts }
   }
 }
