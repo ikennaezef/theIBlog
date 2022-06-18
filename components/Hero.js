@@ -10,7 +10,7 @@ const Hero = ({ post }) => {
           <h3 className='text-emerald-400 text-md font-sans mb-4'>Featured post</h3>
           <h1 className='text-3xl text-white font-bold mb-2 md:text-4xl'>{post.title}</h1>
           <p className='text-md text-gray-200 mb-6 md:text-lg'>{post.subtitle}</p>
-          <Link href='/'>
+          <Link href={`/articles/${post.slug.current}`}>
             <a className='px-8 py-2 text-white bg-emerald-600 hover:bg-emerald-500'>Read More</a>
           </Link>
         </div>

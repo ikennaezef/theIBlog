@@ -52,8 +52,15 @@ export default {
         {
           title: 'Block',
           type: 'block',
-          styles: [{ title: 'Normal', value: 'normal' }],
-          lists: []
+          styles: [
+            { title: 'Normal', value: 'normal' },
+            { title: 'Heading 3', value: 'h3' },
+            { title: 'Heading 4', value: 'h4' },
+            { title: 'Heading 5', value: 'h5' },
+          ],
+          lists: [
+            { title: 'Bullet', value: 'bullet' }
+          ]
         }
       ]
     }

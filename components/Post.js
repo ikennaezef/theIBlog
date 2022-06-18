@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Post = ({ post }) => {
   return (
     <div className='p-2'>
-      <Link href='/'>
+      <Link href={`/articles/${post.slug.current}`}>
         <a className='hover:bg-gray-100 block p-2'>
           <div className='flex flex-col space-y-4'>
             <div>
