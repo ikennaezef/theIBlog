@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import {
   sanityClient,
   urlFor,
@@ -14,32 +16,53 @@ const postQuery = `*[_type=="post" && slug.current == $slug][0]{
   publicationDate,
   slug,
   image,
-  content
+  content,
+  likes
 }`;
 
 export default function Article({ data }) {
   const { post } = data;
 
-  console.log(post)
+  console.log(post);
+
+  const [likes, setLikes] = useState(post?.likes);
+  const [hasLiked, setHasLiked] = useState(false);
+
+  const addLike = async () => {
+    const res = await fetch('/api/handle-like', {
+      method: 'POST',
+      body: JSON.stringify({ _id: post._id }),
+    }).catch((error) => console.log(error));
+
+
+
+    const data = await res.json();
+    setLikes(data.likes);
+  }
+
+  const handleClick = () => {
+    addLike();
+    setHasLiked(!hasLiked);
+  }
 
   return (
     <article className='container mx-auto px-4 py-6'>
       <div className='flex items-center mb-6'>
-        <img src={urlFor(post.author.image).url()} className='w-10 h-10 rounded-full object-cover mr-4' />
+        <img src={urlFor(post?.author?.image).url()} className='w-10 h-10 rounded-full object-cover mr-4' />
         <div className='flex flex-col'>
-          <p className='text-md font-medium mb-1'>{post.author.name}</p>
-          <span className='text-sm text-gray-400'>Published on {post.publicationDate}</span>
+          <p className='text-md font-medium mb-1'>{post?.author?.name}</p>
+          <span className='text-sm text-gray-400'>Published on {post?.publicationDate}</span>
         </div>
       </div>
       <div>
-        <h1 className='text-3xl md:text-4xl font-bold mb-2'>{post.title}</h1>
-        <p className='text-lg text-gray-400 mb-4'>{post.subtitle}</p>
+        <h1 className='text-3xl md:text-4xl font-bold mb-2'>{post?.title}</h1>
+        <p className='text-lg text-gray-400 mb-4'>{post?.subtitle}</p>
         <div className='mb-8'>
-          <img src={urlFor(post.image).url()} className='w-full object-cover' />
+          <img src={urlFor(post?.image).url()} className='w-full object-cover' />
         </div>
         <div className='py-4'>
           <PortableText
-            value={post.content}
+            value={post?.content}
             components={{
               block: {
                 h3: ({ children }) => <h3 className='text-2xl font-medium leading-loose mt-3 mb-1'>{children}</h3>,
@@ -55,6 +78,9 @@ export default function Article({ data }) {
             }}
           />
         </div>
+      </div>
+      <div>
+        <button onClick={handleClick} className='border py-2 px-6'>{likes} Likes</button>
       </div>
 
     </article>
