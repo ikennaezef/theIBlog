@@ -1,7 +1,9 @@
+import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import LatestPosts from '../components/LatestPosts';
+import Subscribe from '../components/Subscribe';
 
-import { sanityClient, urlFor } from '../lib/sanity';
+import { sanityClient } from '../lib/sanity';
 
 
 
@@ -12,6 +14,8 @@ export default function Home({ posts, latestPosts }) {
       <div className='container mx-auto px-4 pt-8'>
         <LatestPosts posts={latestPosts} />
       </div>
+      <Subscribe />
+      <Footer />
     </div>
   )
 }

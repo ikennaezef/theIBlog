@@ -2,7 +2,6 @@ import {
   sanityClient,
   urlFor,
   usePreviewSubscription,
-  // PortableText,
 } from '../../lib/sanity';
 
 import { PortableText } from '@portabletext/react';
@@ -46,6 +45,12 @@ export default function Article({ data }) {
                 h3: ({ children }) => <h3 className='text-2xl font-medium leading-loose mt-3 mb-1'>{children}</h3>,
                 h4: ({ children }) => <h4 className='text-xl font-medium leading-loose mt-3 mb-1'>{children}</h4>,
                 normal: ({ children }) => <p className='text-md leading-relaxed'>{children}</p>,
+              },
+              list: {
+                bullet: ({ children }) => <ul className='list-disc'>{children}</ul>
+              },
+              listItem: {
+                bullet: ({ children }) => <li>{children}</li>
               }
             }}
           />
