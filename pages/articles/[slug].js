@@ -28,10 +28,10 @@ export default function Article({ data }) {
   const [likes, setLikes] = useState(post?.likes);
   const [hasLiked, setHasLiked] = useState(false);
 
-  const addLike = async () => {
+  const toggleLike = async () => {
     const res = await fetch('/api/handle-like', {
       method: 'POST',
-      body: JSON.stringify({ _id: post._id }),
+      body: JSON.stringify({ _id: post._id, add: !hasLiked }),
     }).catch((error) => console.log(error));
 
 
@@ -41,7 +41,7 @@ export default function Article({ data }) {
   }
 
   const handleClick = () => {
-    addLike();
+    toggleLike();
     setHasLiked(!hasLiked);
   }
 
@@ -70,7 +70,7 @@ export default function Article({ data }) {
                 normal: ({ children }) => <p className='text-md leading-relaxed'>{children}</p>,
               },
               list: {
-                bullet: ({ children }) => <ul className='list-disc'>{children}</ul>
+                bullet: ({ children }) => <ul className='list-disc pl-4'>{children}</ul>
               },
               listItem: {
                 bullet: ({ children }) => <li>{children}</li>
@@ -80,7 +80,7 @@ export default function Article({ data }) {
         </div>
       </div>
       <div>
-        <button onClick={handleClick} className='border py-2 px-6'>{likes} Likes</button>
+        <button onClick={handleClick} className={hasLiked ? `border py-2 px-6 bg-rose-400` : `border py-2 px-6`}>{likes || 0} ❤</button>
       </div>
 
     </article>

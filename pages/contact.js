@@ -9,7 +9,7 @@ const contact = () => {
         <div>
           <p className='text-md leading-relaxed'>Welcome on TheIBlog,</p>
           <p className='text-md leading-relaxed'>Nice to see you here on our blog. If you want to contact us for suggestions, guest posts, advertising or any other query then you can easily drop us an email.</p>
-          <p className='text-md leading-relaxed mt-6'>Mail Us: techcrackblog@gmail.com</p>
+          <p className='text-md leading-relaxed mt-6'>Mail Us: <span className='font-bold'>theiblog@mail.com</span> </p>
         </div>
       </div >
       <Footer />

@@ -5,30 +5,29 @@ sanityClient.config({
 })
 
 export default async function likeButtonHandler(req, res) {
-  const { _id } = JSON.parse(req.body);
+  const { _id, add } = JSON.parse(req.body);
   // let data;
-  const data = await sanityClient
-    .patch(_id)
-    .setIfMissing({ likes: 0 })
-    .inc({ likes: 1 })
-    .commit()
-    .catch((error) => console.log(error));
+  // const data = await sanityClient
+  //   .patch(_id)
+  //   .setIfMissing({ likes: 0 })
+  //   .inc({ likes: 1 })
+  //   .commit()
+  //   .catch((error) => console.log(error));
 
-  // if (!hasLiked) {
-  //   data = await sanityClient
-  //     .patch(_id)
-  //     .setIfMissing({ likes: 0 })
-  //     .inc({ likes: 1 })
-  //     .commit()
-  //     .catch((error) => console.log(error));
-  // } else {
-  //   data = await sanityClient
-  //     .patch(_id)
-  //     .setIfMissing({ likes: 0 })
-  //     .dec({ likes: 1 })
-  //     .commit()
-  //     .catch((error) => console.log(error));
-  // }
+  if (add == true) {
+    const data = await sanityClient
+      .patch(_id)
+      .setIfMissing({ likes: 0 })
+      .inc({ likes: 1 })
+      .commit()
+      .catch((error) => console.log(error));
+  } else {
+    const data = await sanityClient
+      .patch(_id)
+      .dec({ likes: 1 })
+      .commit()
+      .catch((error) => console.log(error));
+  }
 
   res.status(200).json({ likes: data.likes });
 
