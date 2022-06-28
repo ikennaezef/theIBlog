@@ -18,29 +18,51 @@ const postQuery = `*[_type=="post" && slug.current == $slug][0]{
   publicationDate,
   slug,
   image,
+  mainTag,
+  tags,
   content,
   likes
 }`;
 
-export default function Article({ post, otherPosts }) {
+export default function Article({ data, otherPosts, preview }) {
+
+  const { data: post } = usePreviewSubscription(postQuery, {
+    params: { slug: data.post?.slug.current },
+    initialData: data,
+    enabled: preview
+  })
 
   const [likes, setLikes] = useState(post?.likes);
   const [hasLiked, setHasLiked] = useState(false);
 
-  const toggleLike = async () => {
-    const res = await fetch('/api/handle-like', {
+  const addLike = async () => {
+
+    setLikes(likes + 1);
+
+    const res = await fetch('/api/add-like', {
       method: 'POST',
-      body: JSON.stringify({ _id: post._id, add: !hasLiked }),
+      body: JSON.stringify({ _id: post._id })
     }).catch((error) => console.log(error));
 
+    const data = await res.json();
+    setLikes(data.likes);
+  }
 
+  const removeLike = async () => {
+
+    setLikes(likes - 1);
+
+    const res = await fetch('/api/remove-like', {
+      method: 'POST',
+      body: JSON.stringify({ _id: post._id })
+    }).catch((error) => console.log(error));
 
     const data = await res.json();
     setLikes(data.likes);
   }
 
   const handleClick = () => {
-    toggleLike();
+    hasLiked == false ? addLike() : removeLike();
     setHasLiked(!hasLiked);
   }
 
@@ -60,6 +82,10 @@ export default function Article({ post, otherPosts }) {
           <div className='mb-8'>
             <img src={urlFor(post?.image).url()} className='w-full object-cover' />
           </div>
+          <div className='mb-4'>
+            <span className='bg-emerald-100 px-3 py-1 mr-2 text-emerald-600 text-md rounded-sm'>#{post.mainTag}</span>
+            {post.tags.map((tag, index) => <span key={index} className='bg-emerald-100 px-3 py-1 mr-2 text-emerald-600 text-md rounded-sm'>#{tag}</span>)}
+          </div>
           <div className='py-4'>
             <PortableText
               value={post?.content}
@@ -67,7 +93,9 @@ export default function Article({ post, otherPosts }) {
                 block: {
                   h3: ({ children }) => <h3 className='text-2xl font-medium leading-loose mt-3 mb-1'>{children}</h3>,
                   h4: ({ children }) => <h4 className='text-xl font-medium leading-loose mt-3 mb-1'>{children}</h4>,
-                  normal: ({ children }) => <p className='text-md leading-relaxed'>{children}</p>,
+                  h5: ({ children }) => <h5 className='text-lg font-medium leading-loose mt-3 mb-1'>{children}</h5>,
+                  normal: ({ children }) => <p className='text-md mt-2 leading-relaxed'>{children}</p>,
+                  blockquote: ({ children }) => <div className='my-2 border-l-2 border-emerald-500 pl-2'><p className='text-md font-medium leading-relaxed'>{children}</p></div>
                 },
                 list: {
                   bullet: ({ children }) => <ul className='list-disc pl-4'>{children}</ul>
@@ -80,7 +108,7 @@ export default function Article({ post, otherPosts }) {
           </div>
         </div>
         <div>
-          <button onClick={handleClick} className={hasLiked ? `border py-2 px-6 bg-rose-400` : `border py-2 px-6`}>{likes || 0} ❤</button>
+          <button onClick={handleClick} className={hasLiked ? `border py-2 px-6 bg-rose-300 text-rose-600` : `border py-2 px-6 hover:border hover:border-rose-200`}>{likes || 0} {hasLiked ? '❤' : '🤍'} </button>
         </div>
 
       </article>
@@ -110,10 +138,10 @@ export const getStaticProps = async ({ params }) => {
 
   const post = await sanityClient.fetch(postQuery, { slug });
 
-  const otherPostsQuery = '*[_type == "post" && slug.current != $slug][0..3]{ _id, title, subtitle, publicationDate, mainTag, slug, image, author->{name, image} }';
+  const otherPostsQuery = '*[_type == "post" && slug.current != $slug][0..2]{ _id, title, subtitle, publicationDate, mainTag, slug, image, author->{name, image} }';
   const otherPosts = await sanityClient.fetch(otherPostsQuery, { slug });
 
   return {
-    props: { post, otherPosts }
+    props: { data: { post }, otherPosts, preview: true }
   }
 }

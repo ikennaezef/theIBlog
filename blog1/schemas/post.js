@@ -66,6 +66,7 @@ export default {
             { title: 'Heading 3', value: 'h3' },
             { title: 'Heading 4', value: 'h4' },
             { title: 'Heading 5', value: 'h5' },
+            { title: 'BlockQuote', value: 'blockquote' }
           ],
           lists: [
             { title: 'Bullet', value: 'bullet' }

@@ -13,8 +13,14 @@ const about = ({ authors }) => {
             <p className='leading-relaxed'>
               Vos rut violettes la et moi des hiver ardents au, ma ces a moi taches la n'auraient inouies pensif tout. Ô que nuits la je des les. Braises maritimes la vents embaumé, dans ô nacreux moi fileur, ce ou la que mais peuple ainsi qui. Et avec restais de lâche pleuré martyr je.
             </p>
-            <p className='leading-relaxed'>
+            <p className='leading-relaxed mt-3'>
               Aux océans circulation dansé baiser. Ma de les mes d'enfants blonds tremblais vins. Verts parapets l'éther je freles dont qui pourrit, de de que aux qui, forcer mes figements béni sous plus je regrette vu, ni verte comme et géants sais m'a vrai et. Dans des ciel des verts. Et trombes blonds la pas tout. Plus rousseurs - furieux ses pour des plein aux, porteur d'or braises vers enlever gouffres béhémots . L'homme rythmes pareils les au inouies des et. Quand flammes criards triques lenteurs rouleurs. Langueurs aux impassibles verts les, et instants l'oeil soleils accroupi de.
+            </p>
+            <p className='leading-relaxed mt-3'>
+              To scene once a he visit from childe mighty nor, at in none dote which upon hope with maidens. Favour for to  by dear are. Was albions ere mighty honeyed come neer loathed. Formed of him are and which, superstition this yet thence shameless ive, not passed in hall.
+            </p>
+            <p className='leading-relaxed mt-3'>
+              In guessing no the shadows beguiling the tis me lattice gileadtell, tempest will its i name by decorum thee nevermore, denser i the oer from a i above, nevermore and what that it sinking, i a myself before is grave bust i and grave, doubting he or grim this the came. Be remember fantastic the god nearly whose was. Came entrance more surely heart myself sitting, fantastic bust on long.
             </p>
           </div>
         </div>
