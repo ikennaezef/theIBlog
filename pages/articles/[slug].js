@@ -33,7 +33,7 @@ export default function Article({ data, preview }) {
     return <div className='text-xl'>Loading...</div>
   }
 
-  if (!data) return (<div className='text-xl'>Loading...</div>);
+  // if (!data) return (<div className='text-xl'>Loading...</div>);
 
   const { data: { post, otherPosts } } = usePreviewSubscription(postQuery, {
     params: { slug: data.post?.slug.current },

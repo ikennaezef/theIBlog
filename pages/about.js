@@ -8,13 +8,13 @@ const about = ({ authors }) => {
       <div className='container mx-auto px-4'>
         <div className='pt-6'>
           <h2 className='text-3xl font-bold mb-1'>About The<span className='text-emerald-600'>I</span>Blog</h2>
-          <h4 className='text-lg font-sans text-gray-400 mb-6'>What's there to know about this little wonderful blog? I wonder...</h4>
+          <h4 className='text-lg font-sans text-gray-400 mb-6'>Whats there to know about this little wonderful blog? I wonder...</h4>
           <div>
             <p className='leading-relaxed'>
-              Vos rut violettes la et moi des hiver ardents au, ma ces a moi taches la n'auraient inouies pensif tout. Ô que nuits la je des les. Braises maritimes la vents embaumé, dans ô nacreux moi fileur, ce ou la que mais peuple ainsi qui. Et avec restais de lâche pleuré martyr je.
+              Vos rut violettes la et moi des hiver ardents au, ma ces a moi taches la auraient inouies pensif tout. Ô que nuits la je des les. Braises maritimes la vents embaumé, dans ô nacreux moi fileur, ce ou la que mais peuple ainsi qui. Et avec restais de lâche pleuré martyr je.
             </p>
             <p className='leading-relaxed mt-3'>
-              Aux océans circulation dansé baiser. Ma de les mes d'enfants blonds tremblais vins. Verts parapets l'éther je freles dont qui pourrit, de de que aux qui, forcer mes figements béni sous plus je regrette vu, ni verte comme et géants sais m'a vrai et. Dans des ciel des verts. Et trombes blonds la pas tout. Plus rousseurs - furieux ses pour des plein aux, porteur d'or braises vers enlever gouffres béhémots . L'homme rythmes pareils les au inouies des et. Quand flammes criards triques lenteurs rouleurs. Langueurs aux impassibles verts les, et instants l'oeil soleils accroupi de.
+              Aux océans circulation dansé baiser. Ma de les mes d'enfants blonds tremblais vins. Verts parapets léther je freles dont qui pourrit, de de que aux qui, forcer mes figements béni sous plus je regrette vu, ni verte comme et géants sais m'a vrai et. Dans des ciel des verts. Et trombes blonds la pas tout. Plus rousseurs - furieux ses pour des plein aux, porteur d'or braises vers enlever gouffres béhémots . Lhomme rythmes pareils les au inouies des et. Quand flammes criards triques lenteurs rouleurs. Langueurs aux impassibles verts les, et instants loeil soleils accroupi de.
             </p>
             <p className='leading-relaxed mt-3'>
               To scene once a he visit from childe mighty nor, at in none dote which upon hope with maidens. Favour for to  by dear are. Was albions ere mighty honeyed come neer loathed. Formed of him are and which, superstition this yet thence shameless ive, not passed in hall.
