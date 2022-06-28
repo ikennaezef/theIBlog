@@ -23,7 +23,7 @@ export default function Home({ posts, latestPosts }) {
 export async function getStaticProps() {
 
   const postsQuery = '*[_type=="post"]{ _id, title, subtitle, slug, image}';
-  const latestPostsQuery = '*[_type=="post"] | order(publicationDate desc)[0..4]{ _id, title, subtitle, publicationDate, slug, image, author->{name, image}}'
+  const latestPostsQuery = '*[_type=="post"] | order(publicationDate desc)[0..4]{ _id, title, subtitle, publicationDate, mainTag, slug, image, author->{name, image}}'
 
   const posts = await sanityClient.fetch(postsQuery);
   const latestPosts = await sanityClient.fetch(latestPostsQuery);

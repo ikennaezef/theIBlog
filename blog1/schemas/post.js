@@ -34,6 +34,15 @@ export default {
       to: [{ type: 'author' }]
     },
     {
+      name: 'mainTag',
+      title: 'Main Tag',
+      type: 'string',
+      options: {
+        list: ['lifestyle', 'sports', 'tech', 'business', 'entertainment', 'self development']
+      },
+      validation: Rule => Rule.required().error('A main tag is required')
+    },
+    {
       name: 'tags',
       title: 'Tags',
       type: 'array',

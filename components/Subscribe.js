@@ -7,7 +7,7 @@ const Subscribe = () => {
           <p className='text-lg text-center'>Subscribe and be the first to receive mails about the latest updates and posts.</p>
           <form className='flex flex-col space-y-2 mt-6 justify-center md:flex-row md:space-x-4 md:space-y-0'>
             <input type='email' placeholder='Enter your email' className='px-4 py-2 outline-0 border border-emerald-200 focus:border-emerald-500' />
-            <button className='bg-emerald-600 text-white font-medium px-6 py-2'>Subscribe</button>
+            <button className='bg-emerald-600 text-white font-medium px-6 py-2 hover:bg-emerald-500'>Subscribe</button>
           </form>
         </div>
       </div>

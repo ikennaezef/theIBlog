@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import OtherPosts from '../../components/OtherPosts';
+import Footer from '../../components/Footer';
 
 import {
   sanityClient,
@@ -20,10 +22,7 @@ const postQuery = `*[_type=="post" && slug.current == $slug][0]{
   likes
 }`;
 
-export default function Article({ data }) {
-  const { post } = data;
-
-  console.log(post);
+export default function Article({ post, otherPosts }) {
 
   const [likes, setLikes] = useState(post?.likes);
   const [hasLiked, setHasLiked] = useState(false);
@@ -46,44 +45,48 @@ export default function Article({ data }) {
   }
 
   return (
-    <article className='container mx-auto px-4 py-6'>
-      <div className='flex items-center mb-6'>
-        <img src={urlFor(post?.author?.image).url()} className='w-10 h-10 rounded-full object-cover mr-4' />
-        <div className='flex flex-col'>
-          <p className='text-md font-medium mb-1'>{post?.author?.name}</p>
-          <span className='text-sm text-gray-400'>Published on {post?.publicationDate}</span>
+    <>
+      <article className='container mx-auto px-4 py-6'>
+        <div className='flex items-center mb-6'>
+          <img src={urlFor(post?.author?.image).url()} className='w-10 h-10 rounded-full object-cover mr-4' />
+          <div className='flex flex-col'>
+            <p className='text-md font-medium mb-1'>{post?.author?.name}</p>
+            <span className='text-sm text-gray-400'>Published on {post?.publicationDate}</span>
+          </div>
         </div>
-      </div>
-      <div>
-        <h1 className='text-3xl md:text-4xl font-bold mb-2'>{post?.title}</h1>
-        <p className='text-lg text-gray-400 mb-4'>{post?.subtitle}</p>
-        <div className='mb-8'>
-          <img src={urlFor(post?.image).url()} className='w-full object-cover' />
+        <div>
+          <h1 className='text-3xl md:text-4xl font-bold mb-2'>{post?.title}</h1>
+          <p className='text-lg text-gray-400 mb-4'>{post?.subtitle}</p>
+          <div className='mb-8'>
+            <img src={urlFor(post?.image).url()} className='w-full object-cover' />
+          </div>
+          <div className='py-4'>
+            <PortableText
+              value={post?.content}
+              components={{
+                block: {
+                  h3: ({ children }) => <h3 className='text-2xl font-medium leading-loose mt-3 mb-1'>{children}</h3>,
+                  h4: ({ children }) => <h4 className='text-xl font-medium leading-loose mt-3 mb-1'>{children}</h4>,
+                  normal: ({ children }) => <p className='text-md leading-relaxed'>{children}</p>,
+                },
+                list: {
+                  bullet: ({ children }) => <ul className='list-disc pl-4'>{children}</ul>
+                },
+                listItem: {
+                  bullet: ({ children }) => <li>{children}</li>
+                }
+              }}
+            />
+          </div>
         </div>
-        <div className='py-4'>
-          <PortableText
-            value={post?.content}
-            components={{
-              block: {
-                h3: ({ children }) => <h3 className='text-2xl font-medium leading-loose mt-3 mb-1'>{children}</h3>,
-                h4: ({ children }) => <h4 className='text-xl font-medium leading-loose mt-3 mb-1'>{children}</h4>,
-                normal: ({ children }) => <p className='text-md leading-relaxed'>{children}</p>,
-              },
-              list: {
-                bullet: ({ children }) => <ul className='list-disc pl-4'>{children}</ul>
-              },
-              listItem: {
-                bullet: ({ children }) => <li>{children}</li>
-              }
-            }}
-          />
+        <div>
+          <button onClick={handleClick} className={hasLiked ? `border py-2 px-6 bg-rose-400` : `border py-2 px-6`}>{likes || 0} ❤</button>
         </div>
-      </div>
-      <div>
-        <button onClick={handleClick} className={hasLiked ? `border py-2 px-6 bg-rose-400` : `border py-2 px-6`}>{likes || 0} ❤</button>
-      </div>
 
-    </article>
+      </article>
+      <OtherPosts posts={otherPosts} />
+      <Footer />
+    </>
   )
 }
 
@@ -107,7 +110,10 @@ export const getStaticProps = async ({ params }) => {
 
   const post = await sanityClient.fetch(postQuery, { slug });
 
+  const otherPostsQuery = '*[_type == "post" && slug.current != $slug][0..3]{ _id, title, subtitle, publicationDate, mainTag, slug, image, author->{name, image} }';
+  const otherPosts = await sanityClient.fetch(otherPostsQuery, { slug });
+
   return {
-    props: { data: { post } }
+    props: { post, otherPosts }
   }
 }
