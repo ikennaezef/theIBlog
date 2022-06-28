@@ -27,14 +27,6 @@ const postQuery = `*[_type=="post" && slug.current == $slug][0]{
 
 export default function Article({ data, preview }) {
 
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return <div className='text-xl'>Loading...</div>
-  }
-
-  // if (!data) return (<div className='text-xl'>Loading...</div>);
-
   const { data: { post, otherPosts } } = usePreviewSubscription(postQuery, {
     params: { slug: data.post?.slug.current },
     initialData: data,
@@ -45,6 +37,14 @@ export default function Article({ data, preview }) {
 
   const [likes, setLikes] = useState(post?.likes);
   const [hasLiked, setHasLiked] = useState(false);
+
+  const router = useRouter();
+
+  if (router.isFallback) {
+    return <div className='text-xl'>Loading...</div>
+  }
+
+  if (!data) return (<div className='text-xl'>Loading...</div>);
 
   const addLike = async () => {
 
