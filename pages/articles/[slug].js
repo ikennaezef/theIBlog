@@ -94,8 +94,8 @@ export default function Article({ data, preview }) {
             <img src={urlFor(post?.image).url()} className='w-full object-cover' />
           </div>
           <div className='mb-4'>
-            <span className='bg-emerald-100 px-3 py-1 mr-2 text-emerald-600 text-md rounded-sm'>#{post.mainTag}</span>
-            {post.tags.map((tag, index) => <span key={index} className='bg-emerald-100 px-3 py-1 mr-2 text-emerald-600 text-md rounded-sm'>#{tag}</span>)}
+            <span className='bg-emerald-100 px-3 py-1 mr-2 text-emerald-600 text-md rounded-sm'>#{post?.mainTag}</span>
+            {post.tags && post.tags.map((tag, index) => <span key={index} className='bg-emerald-100 px-3 py-1 mr-2 text-emerald-600 text-md rounded-sm'>#{tag}</span>)}
           </div>
           <div className='py-4'>
             <PortableText
