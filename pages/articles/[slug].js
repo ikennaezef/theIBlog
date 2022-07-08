@@ -25,7 +25,7 @@ const postQuery = `*[_type=="post" && slug.current == $slug][0]{
   likes
 }`;
 
-export default function Article({ data }) {
+export default function Article({ post, otherPosts }) {
 
   // const { data: { post, otherPosts } } = usePreviewSubscription(postQuery, {
   //   params: { slug: data.post?.slug.current },
@@ -33,7 +33,7 @@ export default function Article({ data }) {
   //   enabled: preview
   // })
 
-  const { post, otherPosts } = data;
+  console.log(post);
 
   const [likes, setLikes] = useState(post?.likes);
   const [hasLiked, setHasLiked] = useState(false);
@@ -44,7 +44,7 @@ export default function Article({ data }) {
     return <div className='text-xl'>Loading...</div>
   }
 
-  if (!data.post) return (<div className='text-xl'>Loading...</div>);
+  if (!post) return (<div className='text-xl'>Loading...</div>);
 
   const addLike = async () => {
 
@@ -80,7 +80,7 @@ export default function Article({ data }) {
   return (
     <>
       {
-        data.post &&
+        post &&
 
         <article className='container mx-auto px-4 py-6'>
           <div className='flex items-center mb-6'>
@@ -158,6 +158,6 @@ export const getStaticProps = async ({ params }) => {
 
   return {
     // props: { data: { post, otherPosts }, preview: true }
-    props: { data: { post, otherPosts } }
+    props: { post, otherPosts }
   }
 }
