@@ -25,15 +25,15 @@ const postQuery = `*[_type=="post" && slug.current == $slug][0]{
   likes
 }`;
 
-export default function Article({ data, preview }) {
+export default function Article({ data }) {
 
-  const { data: { post, otherPosts } } = usePreviewSubscription(postQuery, {
-    params: { slug: data.post?.slug.current },
-    initialData: data,
-    enabled: preview
-  })
+  // const { data: { post, otherPosts } } = usePreviewSubscription(postQuery, {
+  //   params: { slug: data.post?.slug.current },
+  //   initialData: data,
+  //   enabled: preview
+  // })
 
-  // const { post } = data;
+  const { post, otherPosts } = data;
 
   const [likes, setLikes] = useState(post?.likes);
   const [hasLiked, setHasLiked] = useState(false);
@@ -157,6 +157,7 @@ export const getStaticProps = async ({ params }) => {
   const otherPosts = await sanityClient.fetch(otherPostsQuery, { slug });
 
   return {
-    props: { data: { post, otherPosts }, preview: true }
+    // props: { data: { post, otherPosts }, preview: true }
+    props: { data: { post, otherPosts } }
   }
 }
